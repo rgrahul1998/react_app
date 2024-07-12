@@ -1,23 +1,42 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import NavBar from './components/include/navbar';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import Home from './components/pages/home';
+import Signup from './components/pages/signup';
+import Onboarding from './components/pages/onboarding';
+import Dashboard from './components/pages/dashboard';
+import ContactUs from './components/pages/contact_us';
+import LandingPage from './components/pages/landing-page/LandingPage'
+import SignIn from './components/pages/signin';
+import Footer from './components/pages/landing-page/components/Footer';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
+  );
+}
+
+function AppContent() {
+  const location = useLocation();
+  const noFooterPaths = ['/login', '/signup', '/dashboard'];
+
+
+  return (
+    <div>
+      {location.pathname !== '/dashboard' && <NavBar />}
+      <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<SignIn />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/about/contact-us" element={<ContactUs />} />
+      </Routes>
+      {!noFooterPaths.includes(location.pathname) && <Footer />}
     </div>
   );
 }

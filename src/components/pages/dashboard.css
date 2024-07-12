@@ -1,0 +1,22 @@
+.padding_all{
+    padding: 10px 10px 10px 10px;
+}
+
+.price_title{
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.price_description{
+    font-size: 16px;
+}
+
+.icon_style{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.card_gradient{
+    background: rgb(53, 138, 158);
+    background: linear-gradient(158deg, rgba(53, 138, 158, 1) 0%, rgba(91, 180, 96, 1) 100%);
+}
