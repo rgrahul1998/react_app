@@ -8,6 +8,7 @@ import './Navbar.css';  // Import the custom CSS file
 import useLogout from './use_logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Avatar, Menu, MenuItem, IconButton } from '@mui/material';
+// eslint-disable-next-line
 import { Padding } from '@mui/icons-material';
 
 function NavBar() {
