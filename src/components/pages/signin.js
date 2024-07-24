@@ -11,8 +11,9 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Divider from '@mui/material/Divider';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import google_image from "../images/web_light_sq_SI@4x.png";
 
 const defaultTheme = createTheme();
 
@@ -30,7 +31,7 @@ export default function SignIn() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        'http://127.0.0.1:8000/api/method/digital_insights.digital_insights.api.login.get_access_api_token',
+        'https://insights.asiot.net/api/method/digital_insights.digital_insights.api.login.get_access_api_token',
         null,
         {
           params: {
@@ -42,6 +43,9 @@ export default function SignIn() {
       );
 
       if (response.data.message.msg === 'success') {
+        const token = response.data.message.data.access_token.access_token;
+        localStorage.setItem('access_token', token);
+  
         if (response.data.message.first_time_login) {
           navigate('/onboarding');
         } else {
@@ -54,6 +58,10 @@ export default function SignIn() {
       console.error('There was an error!', error);
       setError('Internal server error');
     }
+  };
+
+  const handleGoogleSignIn = () => {
+    // Handle Google sign-in logic here
   };
 
   return (
@@ -127,6 +135,29 @@ export default function SignIn() {
               </Grid>
             </Grid>
           </Box>
+
+          <Divider sx={{ width: '100%', mt: 2, mb: 2 }}>or</Divider>
+
+          <Button
+            fullWidth
+            variant="outlined"
+            onClick={handleGoogleSignIn}
+            sx={{
+              mt: 1,
+              mb: 2,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textTransform: 'none',
+            }}
+          >
+            <img
+              src={google_image}
+              alt="Google sign-in"
+              style={{ width: '20px', height: '20px', marginRight: '8px' }}
+            />
+            Sign in with Google
+          </Button>
         </Box>
       </Container>
     </ThemeProvider>

@@ -18,7 +18,7 @@ function Onboarding() {
     sector: '',
     location: ''
   });
-
+  // eslint-disable-next-line
   const [isSubmitted, setIsSubmitted] = useState(false);
   const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ function Onboarding() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/method/digital_insights.digital_insights.api.company_onboard.create_company_onboard_api', null, {
+      const response = await axios.post('https://insights.asiot.net/api/method/digital_insights.digital_insights.api.company_onboard.create_company_onboard_api', null, {
         params: {
           user: formData.user,
           company: formData.company,

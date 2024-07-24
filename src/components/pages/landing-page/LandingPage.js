@@ -12,6 +12,7 @@ import Product from './components/Product';
 
 
 export default function LandingPage() {
+  // eslint-disable-next-line
   const [mode, setMode] = React.useState('light');
   const defaultTheme = createTheme({ palette: { mode } });
 

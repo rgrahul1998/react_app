@@ -1,7 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/include/navbar';
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import Home from './components/pages/home';
 import Signup from './components/pages/signup';
 import Onboarding from './components/pages/onboarding';
@@ -22,6 +22,7 @@ function App() {
 function AppContent() {
   const location = useLocation();
   const noFooterPaths = ['/login', '/signup', '/dashboard'];
+  const isAuthenticated = !!localStorage.getItem('access_token');
 
 
   return (
@@ -32,8 +33,11 @@ function AppContent() {
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<SignIn />} />
           <Route path="/signup" element={<Signup />} />
+          
           <Route path="/onboarding" element={<Onboarding />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} />
+
+          <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} />
           <Route path="/about/contact-us" element={<ContactUs />} />
       </Routes>
       {!noFooterPaths.includes(location.pathname) && <Footer />}

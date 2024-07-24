@@ -37,7 +37,7 @@ export default function SignUp() {
     }
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/method/digital_insights.digital_insights.api.signup.create_user_api', null, {
+      const response = await axios.post('https://insights.asiot.net/api/method/digital_insights.digital_insights.api.signup.create_user_api', null, {
         params: {
           email: email,
           password: password,
